@@ -29,14 +29,18 @@ public class BinaryPredicateTest {
 	void testLessEqual() {
 		LessEqual lessEqual = new LessEqual();
 		
-		int smallTerm = 7;
-		int bigTerm = 100;
-		List<Integer> lessThanExpression = new ArrayList<>();
-		lessThanExpression.add(smallTerm);
-		lessThanExpression.add(bigTerm);
-		assertTrue(lessEqual.evaluate(lessThanExpression).isPresent());
-		assertTrue(lessEqual.evaluate(lessThanExpression).get());
+		assertTrue(lessEqual.evaluate(List.of(7,100)).get());
+		assertFalse(lessEqual.evaluate(List.of(123, 100)).get());
+		assertTrue(lessEqual.evaluate(List.of(123, 123)).get());
 		
+		assertFalse(lessEqual.evaluate(List.of(123, null)).isPresent());
+		assertFalse(lessEqual.evaluate(List.of(null,123)).isPresent());
+		assertFalse(lessEqual.evaluate(List.of(null, null)).isPresent());
+	}
+	
+	@Test 
+	void testEquals() {
+		Equals equals = new Equals();
 	}
 
 }

@@ -29,18 +29,39 @@ public class BinaryPredicateTest {
 	void testLessEqual() {
 		LessEqual lessEqual = new LessEqual();
 		
-		assertTrue(lessEqual.evaluate(List.of(7,100)).get());
-		assertFalse(lessEqual.evaluate(List.of(123, 100)).get());
-		assertTrue(lessEqual.evaluate(List.of(123, 123)).get());
+		assertTrue(lessEqual.evaluate(Arrays.asList(7,100)).get());
+		assertFalse(lessEqual.evaluate(Arrays.asList(123, 100)).get());
+		assertTrue(lessEqual.evaluate(Arrays.asList(123, 123)).get());
 		
-		assertFalse(lessEqual.evaluate(List.of(123, null)).isPresent());
-		assertFalse(lessEqual.evaluate(List.of(null,123)).isPresent());
-		assertFalse(lessEqual.evaluate(List.of(null, null)).isPresent());
+		assertFalse(lessEqual.evaluate(Arrays.asList(123, null)).isPresent());
+		assertFalse(lessEqual.evaluate(Arrays.asList(null,123)).isPresent());
+		assertFalse(lessEqual.evaluate(Arrays.asList(null, null)).isPresent());
 	}
 	
 	@Test 
 	void testEquals() {
 		Equals equals = new Equals();
+		
+		assertFalse(equals.evaluate(Arrays.asList(7,100)).get());
+		assertFalse(equals.evaluate(Arrays.asList(123, 100)).get());
+		assertTrue(equals.evaluate(Arrays.asList(123, 123)).get());
+		
+		assertFalse(equals.evaluate(Arrays.asList(123, null)).isPresent());
+		assertFalse(equals.evaluate(Arrays.asList(null,123)).isPresent());
+		assertFalse(equals.evaluate(Arrays.asList(null, null)).isPresent());
+	}
+	
+	@Test
+	void testGreaterThan() {
+		GreaterThan greaterThan = new GreaterThan();
+		
+		assertFalse(greaterThan.evaluate(Arrays.asList(7,100)).get());
+		assertTrue(greaterThan.evaluate(Arrays.asList(123, 100)).get());
+		assertFalse(greaterThan.evaluate(Arrays.asList(123, 123)).get());
+		
+		assertFalse(greaterThan.evaluate(Arrays.asList(123, null)).isPresent());
+		assertFalse(greaterThan.evaluate(Arrays.asList(null,123)).isPresent());
+		assertFalse(greaterThan.evaluate(Arrays.asList(null, null)).isPresent());
 	}
 
 }
